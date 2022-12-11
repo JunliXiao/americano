@@ -9,7 +9,7 @@ public class Script {
 
     public static void main(String[] args) {
         ArrayList<String> commands = parseCommand("/Users/xiaojunli/MySQL_Homework/JDBC/Comment_test.sql");
-        // 印出 SQL 腳本移除掉註解的內容
+        // 印出 SQL 腳本的內容, 不含註解
         for (String command: commands) {
             System.out.println(command);
         }
@@ -30,7 +30,7 @@ public class Script {
         return commands;
     }
 
-    // 先從檔案讀到整個 SQL 腳本檔內容，清除單行/多行註解
+    // 先從檔案讀取 SQL 腳本檔內容，清除單行/多行註解
     private static String readScript(String filePath) {
         StringBuilder sb = new StringBuilder();
         String str;
@@ -55,7 +55,7 @@ public class Script {
         return index == -1 ? line : line.substring(0, index);
     }
 
-    // 清除多行註解，非必要，不影響指令重組後的語意
+    // 清除多行註解，非必要，不影響指令重組後的執行
     private static String removeCommentMultiple(String lines) {
         // StackOverflow: Java - regular expression finding comments in code
         String commentRegex = "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/";
